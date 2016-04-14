@@ -1,0 +1,6 @@
+(defun c:z()
+  (command "_xline" "_h" pause)
+  )
+(defun c:v()
+  (command "_xline" "_v" pause)
+  )
