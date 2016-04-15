@@ -9,5 +9,7 @@
 (ld "F_XLINE")
 (ld "OSNAPZ_SWITCHER")
 (ld "QUICK_BLOCK")
+(ld "ZAOKR_POLI")
+(ld "EXDWG")
 
 (princ)
