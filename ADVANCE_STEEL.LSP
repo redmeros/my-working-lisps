@@ -41,6 +41,11 @@
   (command "_AstM9CommTrimExtend" "A" "_L")
 )
 
+;point weld
+(defun c:sr()
+	(command "_AstM4WeldSeam" "POINT")
+)
+
 ;0. saves current file!
 ;1. saves file as file_ACIS then tries to explode every instance of AS object to ACIS
 ;2. saves file
