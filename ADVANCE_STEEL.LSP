@@ -31,6 +31,15 @@
   (COMMAND "_AstM4SwitchReprMode" "MAINSTRUCTURE")
 )
 
+;select part with the connection elements
+(defun c:sss()
+	(COMMAND "_AstM4CommMarkSelAdd" pause "")
+	(COMMAND "_AstM4CommSelectMarkedObjects" "")
+	(COMMAND "_AstM4CommMarkConnMeans" "")
+	(PRINC "DUPE")
+)
+
+
 					;AS_COPY
 (defun c:kk ()
   (command "-ASTransformAndConnect" "_c")
