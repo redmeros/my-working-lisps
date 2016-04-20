@@ -46,6 +46,18 @@
 	(command "_AstM4WeldSeam" "POINT")
 )
 
+;ukrywa ramki polaczen
+(defun c:urp()
+	(command "_AstM4SelectObjectByName" "ASTXDIALOG")
+	(command "_AstM4SwitchReprMode" "off")
+)
+
+;pokazuje ramki polaczen
+(defun c:prp()
+	(command "_AstM4SelectObjectByName" "ASTXDIALOG")
+	(command "_AstM4SwitchReprMode" "default")
+)
+
 ;0. saves current file!
 ;1. saves file as file_ACIS then tries to explode every instance of AS object to ACIS
 ;2. saves file
