@@ -40,12 +40,12 @@
 )
 
 
-					;AS_COPY
+;AS_COPY
 (defun c:kk ()
   (command "-ASTransformAndConnect" "_c")
 )
 
-					;AS_TRIM TO LINE
+;AS_TRIM TO LINE
 (defun c:ttr ()
   (command "_AstM9CommTrimExtend" "A" "_L")
 )
