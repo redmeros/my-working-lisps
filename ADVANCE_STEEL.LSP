@@ -4,7 +4,7 @@
 ;;  Substitutes a string for all occurrences of another       ;;
 ;;  string within a string.                                   ;;
 ;;------------------------------------------------------------;;
-;;  Author: Lee Mac, Copyright � 2011 - www.lee-mac.com       ;;
+;;  Author: Lee Mac, Copyright � 2011 - www.lee-mac.com       ;;
 ;;------------------------------------------------------------;;
 ;;  Arguments:                                                ;;
 ;;  new - string to be substituted for 'old'                  ;;
@@ -45,6 +45,11 @@
   (command "-ASTransformAndConnect" "_c")
 )
 
+;AS_MIRROR
+(defun c:mirr()
+	(command "-ASTransformAndConnect" "_mi" "_2d")
+)
+
 ;AS_TRIM TO LINE
 (defun c:ttr ()
   (command "_AstM9CommTrimExtend" "A" "_L")
@@ -80,4 +85,17 @@
   (command "_AstM4CommExplodeToAcis")
   (princ)
   (setvar "filedia" 1)
+)
+
+;ukrywa niepotrzebne elementy ustawia widoczność
+; na standard i exportuje do navisa
+(defun c:exporttonavis()
+	;(command "_qsave")
+	;(command "_AstM4SelectObjectByName" "ASTXDIALOG")
+	;(command "_AstM4SwitchReprMode" "off")
+	(command "_AstM4SelectObjectByName" "ASTBEAM")
+	(command "_AstM4SwitchReprMode" "default")
+  (COMMAND \U+001B)
+	(command "_AstM4SelectObjectByName" "ASTPLATE")
+	;(command "_ExportToNav")
 )
