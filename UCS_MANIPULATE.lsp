@@ -19,3 +19,13 @@
 	(command "_UCS" "_W")
 	(princ)
 	)
+
+	
+;USTAWIA UCS NA OBIEKT
+(defun c:uo()
+	(command "_ucs" "ob" pause)
+)
+
+(defun c:rq()
+	(command "_astm4cecs")
+)

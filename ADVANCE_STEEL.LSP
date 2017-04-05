@@ -4,7 +4,7 @@
 ;;  Substitutes a string for all occurrences of another       ;;
 ;;  string within a string.                                   ;;
 ;;------------------------------------------------------------;;
-;;  Author: Lee Mac, Copyright � 2011 - www.lee-mac.com       ;;
+;;  Author: Lee Mac, Copyright � 2011 - www.lee-mac.com       ;;
 ;;------------------------------------------------------------;;
 ;;  Arguments:                                                ;;
 ;;  new - string to be substituted for 'old'                  ;;
@@ -40,12 +40,17 @@
 )
 
 
-					;AS_COPY
+;AS_COPY
 (defun c:kk ()
   (command "-ASTransformAndConnect" "_c")
 )
 
-					;AS_TRIM TO LINE
+;AS_MIRROR
+(defun c:mirr()
+	(command "-ASTransformAndConnect" "_mi" "_2d")
+)
+
+;AS_TRIM TO LINE
 (defun c:ttr ()
   (command "_AstM9CommTrimExtend" "A" "_L")
 )
@@ -80,4 +85,48 @@
   (command "_AstM4CommExplodeToAcis")
   (princ)
   (setvar "filedia" 1)
+)
+
+;włącza układ współrzędnych na podstawie wybranego obiektu
+(defun c:qw()
+  (command "_ASTORCECS")
+)
+
+;ukrywa niepotrzebne elementy ustawia widoczność
+; na standard i exportuje do navisa
+(defun c:exporttonavis()
+  (command "_qsave")
+  (command "_AstM4SelectObjectByName" "ASTXDIALOG")
+  (command "_AstM4SwitchReprMode" "off")
+  (sssetfirst nil nil)
+  (command "_AstM4SelectObjectByName" "ASTBEAM")
+  (command "_AstM4SwitchReprMode" "default")
+  (sssetfirst nil nil)
+  (command "_AstM4SelectObjectByName" "ASTPLATE")
+  (command "_AstM4SwitchReprMode" "default")
+  (sssetfirst nil nil)
+  (command "_AstM4SelectObjectByName" "ASTWELD")
+  (command "_AstM4SwitchReprMode" "OFF")
+  (sssetfirst nil nil)
+  (command "_AstM4SelectObjectByName" "ASTSCREWBOLTPATTERN")
+  (command "_AstM4SwitchReprMode" "default")
+  (command "_ASTORCHANGEREP")
+  (command "_ASTORCHANGEREP")
+  (sssetfirst nil nil)
+  (command "_AstM4SelectObjectByName" "ASTANCHOR")
+  (command "_AstM4SwitchReprMode" "default")
+  (command "_ASTORCHANGEREP")
+  (command "_ASTORCHANGEREP")
+  (sssetfirst nil nil)
+  (command "_ExportToNav")
+)
+
+;POKAZUJE WYBRANE ELEMENTY
+(defun c:so()
+	(command "_AstM10ViewSelObjects" "OBJECTS")
+)
+
+;POKAZUJE WSZYSTKO
+(defun c:sa()
+	(command "_AstM10ShowAllObjects")
 )
