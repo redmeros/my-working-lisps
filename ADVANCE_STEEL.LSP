@@ -92,10 +92,11 @@
   (command "_ASTORCECS")
 )
 
-;ukrywa niepotrzebne elementy ustawia widoczność
-; na standard i exportuje do navisa
-(defun c:exporttonavis()
-  (command "_qsave")
+;normalizuje widok do wszelkiego rodzaju eksportów
+(defun normalize_view()
+  (command "_AstM4SelectObjectByName" "ASTXCAMERA")
+  (command "_AstM4SwitchReprMode" "off")
+  (sssetfirst nil nil)
   (command "_AstM4SelectObjectByName" "ASTXDIALOG")
   (command "_AstM4SwitchReprMode" "off")
   (sssetfirst nil nil)
@@ -118,6 +119,14 @@
   (command "_ASTORCHANGEREP")
   (command "_ASTORCHANGEREP")
   (sssetfirst nil nil)
+)
+
+
+;ukrywa niepotrzebne elementy ustawia widoczność
+; na standard i exportuje do navisa
+(defun c:exporttonavis()
+  (command "_qsave")
+  (normalize_view)
   (command "_ExportToNav")
 )
 
