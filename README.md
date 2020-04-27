@@ -35,6 +35,8 @@ Lispy których używam przy pracy ze steelem
 
 **sa** - Pokazuje wszystkie obiekty (pokaż wszystko steelowe)
 
+**laynamedate** - Zmienia nazwy wszystkich warstw w pliku dwg - dodaje przedrostek z datą do każdej warstwy
+
 ### AUTOLOAD.lsp
 
 Ten Lisp nie działa i nie będzie działał ze względu na nową politykę bezpieczeństwa Autodesku
