@@ -36,7 +36,6 @@
 	(COMMAND "_AstM4CommMarkSelAdd" pause "")
 	(COMMAND "_AstM4CommSelectMarkedObjects" "")
 	(COMMAND "_AstM4CommMarkConnMeans" "")
-	(PRINC "DUPE")
 )
 
 
@@ -122,6 +121,16 @@
 )
 
 
+(defun c:exportToNavisTylkoStal()
+	; ukrywanie elementów żelbetowych (wszystkie bryły i bloki)
+	(normalize_view)
+	(command "_AstM4CommSelectAllDscObjects_")
+	(command "_AstM10ViewSelObjects_")
+	(sssetfirst nil nil)
+	(command "_ExportToNav")
+	(princ)
+)
+
 ;ukrywa niepotrzebne elementy ustawia widoczność
 ; na standard i exportuje do navisa
 (defun c:exporttonavis()
@@ -138,4 +147,54 @@
 ;POKAZUJE WSZYSTKO
 (defun c:sa()
 	(command "_AstM10ShowAllObjects")
+)
+
+;WIDOK STANDARDOWY - SZYBKI
+(defun c:ws()
+	(command "_propertiesclose")
+	(c:urp)
+	(command "_-layer" "_off" "DCS_KS_SPOINY" "")
+	(command "_-layer" "_off" "DCS_KS_Kamery*" "")
+	(command "_-visualstyles" "_c" "C")
+	(command "_AstM4SelectObjectByName" "ASTSCREWBOLTPATTERN")
+    (command "_AstM4SwitchReprMode" "default")
+	(sssetfirst nil nil)
+	(command "_AstM4SelectObjectByName" "ASTBEAM")
+	(command "_AstM4SwitchReprMode" "default")
+	(sssetfirst nil nil)
+	(command "_AstM4SelectObjectByName" "ASTPLATE")
+	(command "_AstM4SwitchReprMode" "default")
+	(sssetfirst nil nil)
+
+)
+
+
+(defun Table(s / d r)
+  	(while (setq d (tblnext s (null d)))
+		     (setq r (cons (cdr (assoc 2 d)) r))
+		)
+)
+
+(defun getDate() 
+	(setq date (rtos (getvar "CDATE") 2 0))
+  	(date)
+)
+
+(defun c:laynamedate()
+  	(setq date (rtos (getvar "CDATE") 2 0))
+	(princ date)
+  	(princ "tesT")
+  	(princ "\r\n")
+  	(setq layers (Table "layer"))
+  	(foreach layer layers (progn
+				(if (/= "0" layer) (progn
+			 		(setq newName (strcat date "_" layer "\r\n"))
+					(princ newName)
+			 		(command "_-layer" "na" layer newName "")
+  			 		)
+				 )
+				)
+	  )
+  	(princ "Jesli tutaj dotarles to wyglada ze wszystko w porzadku")
+  	(princ)
 )
