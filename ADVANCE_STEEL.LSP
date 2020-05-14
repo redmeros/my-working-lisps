@@ -120,10 +120,45 @@
   (sssetfirst nil nil)
 )
 
+; to cos zwraca liste assoc
+; (entget (car (entsel)) '("*"))
+(defun c:HideAllSolids() 
+	(setq solids (ssget "_X" '((0 . "3DSOLID"))))
+	(command "_Hideobjects" solids "")
+	(setq solids (ssget "_X" '((0 . "BODY"))))
+	(command "_Hideobjects" solids "")
+)
+
+(defun c:HideAllLines()
+	(setq solids (ssget "_X" '((0 . "LINE"))))
+	(command "_Hideobjects" solids "")
+)
+
+(defun c:HideAllBlocks() 
+	(setq solids (ssget "_X" '((0 . "INSERT"))))
+	(command "_Hideobjects" solids "")
+)
+
+(defun c:HideAllArcs()
+	(setq solids (ssget "_X" '((0 . "ARC"))))
+	(command "_Hideobjects" solids "")
+	(princ)
+)
+
+(defun c:HideAllNonSteel() 
+	(c:HideAllArcs)
+	(c:HideAllSolids)
+	(c:HideAllBlocks)
+	(c:HideAllLines)
+	(princ)
+)
+
 
 (defun c:exportToNavisTylkoStal()
 	; ukrywanie elementów żelbetowych (wszystkie bryły i bloki)
+	(c:HideAllNonSteel) 
 	(normalize_view)
+	(sssetfirst nil nil)
 	(command "_AstM4CommSelectAllDscObjects_")
 	(command "_AstM10ViewSelObjects_")
 	(sssetfirst nil nil)
