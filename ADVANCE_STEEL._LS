@@ -4,7 +4,7 @@
 ;;  Substitutes a string for all occurrences of another       ;;
 ;;  string within a string.                                   ;;
 ;;------------------------------------------------------------;;
-;;  Author: Lee Mac, Copyright � 2011 - www.lee-mac.com     ;;
+;;  Author: Lee Mac, Copyright � 2011 - www.lee-mac.com       ;;
 ;;------------------------------------------------------------;;
 ;;  Arguments:                                                ;;
 ;;  new - string to be substituted for 'old'                  ;;
@@ -180,64 +180,38 @@
 
 ; to cos zwraca liste assoc
 ; (entget (car (entsel)) '("*"))
-(defun c:HideAllSolids( / solids) 
+(defun c:HideAllSolids() 
 	(setq solids (ssget "_X" '((0 . "3DSOLID"))))
-  	(if solids
-		(command-s "_Hideobjects" solids "")
-	  	(princ "Nie znaleziono solidow\n")
-	 )
+	(command-s "_Hideobjects" solids "")
 	(setq solids (ssget "_X" '((0 . "BODY"))))
-  	(if solids
-		(command-s "_Hideobjects" solids "")
-	  	(princ "Nie znaleziono cial\n")
-	 )
-	(princ)
+	(command-s "_Hideobjects" solids "")
 )
 
 (defun c:HideAllLines()
 	(setq solids (ssget "_X" '((0 . "LINE"))))
-  	(if solids
-		(command-s "_Hideobjects" solids "")
-	  	(princ "Nie znaleziono linii\n")
-	 )
-	(princ)
+	(command-s "_Hideobjects" solids "")
 )
 
 (defun c:HideAllBlocks() 
 	(setq solids (ssget "_X" '((0 . "INSERT"))))
-  	(if solids
-		(command-s "_Hideobjects" solids "")
-	  	(princ "Nie znaleziono blokow\n")
-	 )
-	(princ)
+	(command-s "_Hideobjects" solids "")
 )
-
 
 (defun c:HideAllArcs()
 	(setq solids (ssget "_X" '((0 . "ARC"))))
-  	(if solids
-		(command-s "_Hideobjects" solids "")
-	  	(princ "Nie znaleziono lukow\n")
-	 )
+	(command-s "_Hideobjects" solids "")
 	(princ)
 )
 
 (defun c:HideAllPolylines()
 	(setq solids (ssget "_X" '((0 . "LWPOLYLINE"))))
-  	(if solids
-		(command-s "_Hideobjects" solids "")
-	  	(princ "Nie znaleziono polilinii\n")
-	 )
+	(command-s "_Hideobjects" solids "")
 	(princ)
 )
 
 (defun c:HidePointCloud()
 	(setq solids (ssget "_X" '((0 . "ACDBPOINTCLOUDEX"))))
-  	(if
-		(> (length solids) 0)
-		(command-s "_Hideobjects" solids "")
-	  	(princ "Nie znaleziono chmur punktow\n")
-	 )
+	(command-s "_Hideobjects" solids "")
 	(princ)
 )
 
@@ -248,7 +222,6 @@
 	(c:HideAllLines)
 	(c:HideAllPolylines)
 	(c:HidePointCloud)
-  	(princ "Zakonczono ukrywanie obiektow\n")
 	(princ)
 )
 
