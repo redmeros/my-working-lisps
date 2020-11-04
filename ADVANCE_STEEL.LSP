@@ -333,3 +333,39 @@
   	(princ "Jesli tutaj dotarles to wyglada ze wszystko w porzadku")
   	(princ)
 )
+
+(defun c:explodepolimeshtosolid() 
+	(setq polymesh (ssget "_X" '((100 . "AcDbPolyFaceMesh") (62 . 150) ) ) )
+	(setq idx 0)
+  	(while (setq ent (ssname polymesh idx))
+	  (explodepolimeshtosolid ent)
+	  (setq idx (1+ idx))
+	  )
+  	;(princ polymesh)
+	;(repeat (sslength polymesh)
+;		(explodepolimeshtosolid((nth idx polymesh)));
+		;(setq no (1+ no))
+	;)
+	;(command-s "_select" polymesh "")
+	
+)
+
+(defun explodepolimeshtosolid(mesh)
+	(command-s "_explode" mesh "")
+	(setq face3d (ssget "_X" '((0 . "3DFACE"))))
+	(if face3d
+		(command-s "_region" face3d "")
+		(princ "nie ma 3dfaceow")
+	)
+	(setq regions (ssget "_X" '((0 . "REGION"))))
+	(if regions
+		(command-s "_surfsculpt" regions "")
+		(princ "nie ma regionow")
+	)
+)
+
+(defun c:listDxf() 
+	(setq oldlist (entget (car (entsel))))
+	(princ oldlist)
+)
+;(setq oldlist (entget (car (entsel))))
