@@ -91,189 +91,6 @@
   (command "_ASTORCECS")
 )
 
-
-;normalizuje widok do wszelkiego rodzaju eksportów
-(defun normalize_view( / errobj )
-	(princ "Ukrywam kamery\n")
-	(setq errobj 
-		(vl-catch-all-apply 
-			'(progn
-				(command-s "_AstM4SelectObjectByName" "ASTXCAMERA")
-				(command-s "_AstM4SwitchReprMode" "off")
-				(sssetfirst nil nil)
-			)
-		)
-	)
-
-	(princ "Ukrywam dialogi")
-	(setq errobj 
-		(vl-catch-all-apply 
-			'(progn 
-				(command-s "_AstM4SelectObjectByName" "ASTXDIALOG")
-				(command-s "_AstM4SwitchReprMode" "off")
-				(sssetfirst nil nil)
-			)
-		)
-	)
-	
-	(princ "Ustawiam na belkach repr - standard\n")
-	(setq errobj 
-		(vl-catch-all-apply 
-			'(progn 
-				(command-s "_AstM4SelectObjectByName" "ASTBEAM")
-				(command-s "_AstM4SwitchReprMode" "default")
-				(sssetfirst nil nil)
-			)
-		)
-	)
-
-	(princ "Ustawiam na blachach repr - standard\n")
-	(setq errobj 
-		(vl-catch-all-apply 
-			'(progn 
-				(command-s "_AstM4SelectObjectByName" "ASTPLATE")
-				(command-s "_AstM4SwitchReprMode" "default")
-				(sssetfirst nil nil)
-			)
-		)
-	)
-
-	(princ "Ukrywam spoiny\n")
-	(setq errobj 
-		(vl-catch-all-apply 
-			'(progn 
-				(command-s "_AstM4SelectObjectByName" "ASTWELD")
-				(command-s "_AstM4SwitchReprMode" "OFF")
-				(sssetfirst nil nil)
-			)
-		)
-	)
-	
-	(princ "Ustawiam na srubach widok brylowy \n")
-	(setq errobj 
-		(vl-catch-all-apply 
-			'(progn 
-				(command-s "_AstM4SelectObjectByName" "ASTSCREWBOLTPATTERN")
-				(command-s "_AstM4SwitchReprMode" "default")
-				(command-s "_ASTORCHANGEREP")
-				(command-s "_ASTORCHANGEREP")
-				(sssetfirst nil nil)
-			)
-		)
-	)
-	
-	(princ "Ustawiam na kotwach widok brylowy\n")
-	(setq errobj 
-		(vl-catch-all-apply 
-			'(progn 
-				(command-s "_AstM4SelectObjectByName" "ASTANCHOR")
-				(command-s "_AstM4SwitchReprMode" "default")
-				(command-s "_ASTORCHANGEREP")
-				(command-s "_ASTORCHANGEREP")
-				(sssetfirst nil nil)
-			)
-		)
-	)
-	(princ "\n\nZakonczono normalizowanie widoku")
-	(princ)
-)
-
-; to cos zwraca liste assoc
-; (entget (car (entsel)) '("*"))
-(defun c:HideAllSolids( / solids) 
-	(setq solids (ssget "_X" '((0 . "3DSOLID"))))
-  	(if solids
-		(command-s "_Hideobjects" solids "")
-	  	(princ "Nie znaleziono solidow\n")
-	 )
-	(setq solids (ssget "_X" '((0 . "BODY"))))
-  	(if solids
-		(command-s "_Hideobjects" solids "")
-	  	(princ "Nie znaleziono cial\n")
-	 )
-	(princ)
-)
-
-(defun c:HideAllLines()
-	(setq solids (ssget "_X" '((0 . "LINE"))))
-  	(if solids
-		(command-s "_Hideobjects" solids "")
-	  	(princ "Nie znaleziono linii\n")
-	 )
-	(princ)
-)
-
-(defun c:HideAllBlocks() 
-	(setq solids (ssget "_X" '((0 . "INSERT"))))
-  	(if solids
-		(command-s "_Hideobjects" solids "")
-	  	(princ "Nie znaleziono blokow\n")
-	 )
-	(princ)
-)
-
-
-(defun c:HideAllArcs()
-	(setq solids (ssget "_X" '((0 . "ARC"))))
-  	(if solids
-		(command-s "_Hideobjects" solids "")
-	  	(princ "Nie znaleziono lukow\n")
-	 )
-	(princ)
-)
-
-(defun c:HideAllPolylines()
-	(setq solids (ssget "_X" '((0 . "LWPOLYLINE"))))
-  	(if solids
-		(command-s "_Hideobjects" solids "")
-	  	(princ "Nie znaleziono polilinii\n")
-	 )
-	(princ)
-)
-
-(defun c:HidePointCloud()
-	(setq solids (ssget "_X" '((0 . "ACDBPOINTCLOUDEX"))))
-  	(if
-		(> (length solids) 0)
-		(command-s "_Hideobjects" solids "")
-	  	(princ "Nie znaleziono chmur punktow\n")
-	 )
-	(princ)
-)
-
-(defun c:HideAllNonSteel() 
-	(c:HideAllArcs)
-	(c:HideAllSolids)
-	(c:HideAllBlocks)
-	(c:HideAllLines)
-	(c:HideAllPolylines)
-	(c:HidePointCloud)
-  	(princ "Zakonczono ukrywanie obiektow\n")
-	(princ)
-)
-
-
-(defun c:exportToNavisTylkoStal()
-	; ukrywanie elementów żelbetowych (wszystkie bryły i bloki)
-	(c:HideAllNonSteel) 
-	; Normalizowanie widoku
-	(normalize_view)
-	(sssetfirst nil nil)
-	;(command-s "_ASTM4COMMSELECTALLDSCOBJECTS" "")
-	;(command-s "_AstM10ViewSelObjects_" "")
-	(sssetfirst nil nil)
-	(command-s "_ExportToNav")
-	(princ)
-)
-
-;ukrywa niepotrzebne elementy ustawia widoczność
-; na standard i exportuje do navisa
-(defun c:exporttonavis()
-  (command "_qsave")
-  (normalize_view)
-  (command "_ExportToNav")
-)
-
 ;POKAZUJE WYBRANE ELEMENTY
 (defun c:so()
 	(command "_AstM10ViewSelObjects" "OBJECTS")
@@ -282,25 +99,6 @@
 ;POKAZUJE WSZYSTKO
 (defun c:sa()
 	(command "_AstM10ShowAllObjects")
-)
-
-;WIDOK STANDARDOWY - SZYBKI
-(defun c:ws()
-	(command "_propertiesclose")
-	(c:urp)
-	(command "_-layer" "_off" "DCS_KS_SPOINY" "")
-	(command "_-layer" "_off" "DCS_KS_Kamery*" "")
-	(command "_-visualstyles" "_c" "C")
-	(command "_AstM4SelectObjectByName" "ASTSCREWBOLTPATTERN")
-    (command "_AstM4SwitchReprMode" "default")
-	(sssetfirst nil nil)
-	(command "_AstM4SelectObjectByName" "ASTBEAM")
-	(command "_AstM4SwitchReprMode" "default")
-	(sssetfirst nil nil)
-	(command "_AstM4SelectObjectByName" "ASTPLATE")
-	(command "_AstM4SwitchReprMode" "default")
-	(sssetfirst nil nil)
-
 )
 
 
@@ -315,6 +113,7 @@
   	(date)
 )
 
+; zmienia nazwy warstwa na YYYY-MM-DD_PIERWOTNA_NAZWA
 (defun c:laynamedate()
   	(setq date (rtos (getvar "CDATE") 2 0))
 	(princ date)
@@ -341,15 +140,10 @@
 	  (explodepolimeshtosolid ent)
 	  (setq idx (1+ idx))
 	  )
-  	;(princ polymesh)
-	;(repeat (sslength polymesh)
-;		(explodepolimeshtosolid((nth idx polymesh)));
-		;(setq no (1+ no))
-	;)
-	;(command-s "_select" polymesh "")
-	
 )
 
+; to jest funkcja wewnętrzna - w razie czego można z niej korzystać
+; w inny sposób - jest wywoływana przez c:explodepolimeshtosolid()
 (defun explodepolimeshtosolid(mesh)
 	(command-s "_explode" mesh "")
 	(setq face3d (ssget "_X" '((0 . "3DFACE"))))
@@ -368,4 +162,3 @@
 	(setq oldlist (entget (car (entsel))))
 	(princ oldlist)
 )
-;(setq oldlist (entget (car (entsel))))
