@@ -2,7 +2,6 @@
 
 Lispy których używam przy pracy ze steelem, uwaga - część z tych komend może teraz nie działać - dokumentacja wymaga uaktualnienia
 
-
 ## Skróty - sortowane po nazwach plików
 
 `Zaznacza` - oznacza w tym wypadku zaznaczenie na "czerwono"
@@ -58,6 +57,7 @@ Ten Lisp nie działa i nie będzie działał ze względu na nową politykę bezp
 **q** - Włącza/Wyłącza "płaskość" _autocadową_
 
 ### QUICK_BLOCK
+
 **qb** - Tworzy blok "natychmiast" z zaznaczonych obiektów i nadaje mu unikalną nazwę
 
 ### SEGS.lsp
