@@ -1,6 +1,6 @@
 # Lisps
 
-Lispy których używam przy pracy ze steelem
+Lispy których używam przy pracy ze steelem, uwaga - część z tych komend może teraz nie działać - dokumentacja wymaga uaktualnienia
 
 
 ## Skróty - sortowane po nazwach plików

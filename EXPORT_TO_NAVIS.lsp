@@ -96,6 +96,7 @@
   (hideObjects '((0 . "ASTXBEAMFEATEDGE")))
   (hideObjects '((0 . "ASTXPLATECONTOURNOTCH")))
   (hideObjects '((0 . "ASTXBEAMSHORTENING")))
+  (hideObjects '((0 . "ASTXMODELVIEW")))
  
   (delObjects '((0 . "ASTXWORKAREA")))
   

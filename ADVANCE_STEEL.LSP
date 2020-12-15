@@ -133,31 +133,6 @@
   	(princ)
 )
 
-(defun c:explodepolimeshtosolid() 
-	(setq polymesh (ssget "_X" '((100 . "AcDbPolyFaceMesh") (62 . 150) ) ) )
-	(setq idx 0)
-  	(while (setq ent (ssname polymesh idx))
-	  (explodepolimeshtosolid ent)
-	  (setq idx (1+ idx))
-	  )
-)
-
-; to jest funkcja wewnętrzna - w razie czego można z niej korzystać
-; w inny sposób - jest wywoływana przez c:explodepolimeshtosolid()
-(defun explodepolimeshtosolid(mesh)
-	(command-s "_explode" mesh "")
-	(setq face3d (ssget "_X" '((0 . "3DFACE"))))
-	(if face3d
-		(command-s "_region" face3d "")
-		(princ "nie ma 3dfaceow")
-	)
-	(setq regions (ssget "_X" '((0 . "REGION"))))
-	(if regions
-		(command-s "_surfsculpt" regions "")
-		(princ "nie ma regionow")
-	)
-)
-
 (defun c:listDxf() 
 	(setq oldlist (entget (car (entsel))))
 	(princ oldlist)
