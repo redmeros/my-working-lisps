@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+	<AddIn Type="DBApplication">
+		<Name>Revit DWG extension Plug-in 2018</Name>
+		<Assembly>RvtDwgAddon.dll</Assembly>
+		<AddInId>9F2E732A-289E-4185-B701-15D33C31653F</AddInId>
+		<FullClassName>RvtDwgAddon.Main</FullClassName>
+		<VendorId>Autodesk</VendorId>
+		<VendorDescription>www.autodesk.com</VendorDescription>
+		<LoadInRevitWorker>true</LoadInRevitWorker>
+	</AddIn>
+</RevitAddIns>

@@ -62,6 +62,7 @@
 	(princ "\n")
 )
 
+
 (defun c:newexporttonavis()
   (normalizeBolts '((0 . "ASTBOLTMID")))
   (normalizeBolts '((0 . "ASTBOLT2POINTS")))
@@ -73,6 +74,10 @@
   (normalizeGratings '((0 . "ASTGRATING")))
 
   (hideObjects '((8 . "DCS_HIDE_IN_NAVIS")))
+  (hideObjects '((0 . "CIRCLE")))
+  (hideObjects '((0 . "REGION")))
+  (hideObjects '((0 . "SURFACE")))
+  
   (hideObjects '((0 . "ASTWALL")))
   (hideObjects '((0 . "ASTXSTRUCTURALBOX")))
   ; tutaj powinien byc prompt
