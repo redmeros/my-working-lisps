@@ -74,6 +74,7 @@
   (normalizeGratings '((0 . "ASTGRATING")))
 
   (hideObjects '((8 . "DCS_HIDE_IN_NAVIS")))
+  (hideObjects '((8 . "DCS_KS_Atrapy")))
   (hideObjects '((0 . "CIRCLE")))
   (hideObjects '((0 . "REGION")))
   (hideObjects '((0 . "SURFACE")))

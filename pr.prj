@@ -1,0 +1,32 @@
+;;; VLisp project file [V2.0] pr saved to:[d:\DCS-PROJEKTY\_POMOCE\LISPY] at:[7.07.2022]
+(VLISP-PROJECT-LIST 
+  :NAME
+  pr
+  :OWN-LIST
+  ("ADVANCE_STEEL" 
+    "AUTOLOAD"
+    "ChangeBlockBasePointV1-5"
+    "changecolor"
+    "EXDWG"
+    "EXPORT_BLOCK_AS_XREF"
+    "EXPORT_TO_IFC"
+    "EXPORT_TO_NAVIS"
+    "F_XLINE"
+    "OSNAPZ_SWITCHER"
+    "QUICK_BLOCK"
+    "SEGS"
+    "test_err"
+    "tlen"
+    "UCS_MANIPULATE"
+    "VIEW"
+  )
+  :FAS-DIRECTORY
+  nil
+  :TMP-DIRECTORY
+  nil
+  :PROJECT-KEYS
+  (:BUILD (:standard))
+  :CONTEXT-ID
+  :AUTOLISP
+)
+;;; EOF
