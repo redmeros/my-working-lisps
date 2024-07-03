@@ -1,6 +1,6 @@
 (defun ld(fname)
 	(princ (strcat "\n" "Laduje: " path fname ".lsp"))
-	(load (strcat path "F_XLINE" ".lsp"))
+	(load (strcat path fname ".lsp"))
 	(princ)
 )
 
@@ -8,9 +8,13 @@
 
 (ld "ADVANCE_STEEL")
 (ld "EXDWG")
+(ld "EXPORT_TO_IFC")
+(ld "EXPORT_TO_NAVIS")
 (ld "F_XLINE")
 (ld "OSNAPZ_SWITCHER")
 (ld "QUICK_BLOCK")
+(ld "TLEN")
 (ld "UCS_MANIPULATE")
+(ld "VIEW")
 
 (princ)
